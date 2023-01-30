@@ -17,6 +17,13 @@ function App() {
       done: true
     }
   ]);
+
+  const addItem = (item) => {
+    item.id = "ID-" + items.length;
+    item.done = false;
+    setItem([...items, item]);
+    console.log("items ", items);
+  };
   
   let todoItems = items.length > 0 && (
     <Paper style={{margin: 16}}>
@@ -27,12 +34,12 @@ function App() {
       </List>
     </Paper>
   )                
-  return <div className="App">
-          <Container maxWidth="md">
-            <AddTodo />
-            <div className='TodoList'>{todoItems}</div>
-          </Container>
-          </div>;
+  return (<div className="App">
+            <Container maxWidth="md">
+              <AddTodo addItem={addItem} />
+              <div className='TodoList'>{todoItems}</div>
+            </Container>
+          </div>);
 }
 
 export default App;
