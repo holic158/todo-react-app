@@ -9,12 +9,12 @@ function App() {
     {
       id: "0",
       title: "Hello world1",
-      done: true
+      done: false,
     },
     {
       id: "1",
       title: "Hello world2",
-      done: true
+      done: false,
     }
   ]);
 
@@ -24,12 +24,21 @@ function App() {
     setItem([...items, item]);
     console.log("items ", items);
   };
+
+  const deleteItem = (item) => {
+    const thisItems = items;
+    console.log(thisItems);
+    console.log(item);
+    const newItems = thisItems.filter((e)=> e.id !== item.id);
+    console.log(newItems);
+    setItem(...newItems, item);
+  }
   
   let todoItems = items.length > 0 && (
     <Paper style={{margin: 16}}>
       <List>
-        {items.map((item) => (
-          <Todo item={item} key={item.id} />
+        {items.map((item, idx) => (
+          <Todo item={item} key={item.id} deleteItem={deleteItem}/>
         ))};
       </List>
     </Paper>
