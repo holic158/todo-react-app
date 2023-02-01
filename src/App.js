@@ -14,19 +14,19 @@ function App() {
   }, []);
 
   const addItem = (item) => {
-    item.id = "ID-" + items.length;
-    item.done = false;
-    setItem([...items, item]);
-    console.log("items ", items);
+    call("/todo", "POST", item)
+      .then((response) => setItem(response.data));
   };
 
   const deleteItem = (item) => {
-    const newItems = items.filter(e => e.id !== item.id);
-    setItem([...newItems]);
+    call("/todo", "DELETE", item)
+      .then((response) => setItem(response.data));
   }
   
-  const editItem = () => {
-    setItem([...items]);
+  const editItem = (item) => {
+    call("/todo", "PUT", item)
+      .then((response) => setItem(response.data));
+    // setItem([...items]);
   }
   
   let todoItems = items.length > 0 && (
