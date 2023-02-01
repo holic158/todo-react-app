@@ -2,7 +2,7 @@ import { API_BASE_URL } from "../api-config";
 
 export function call(api, method, request) {
     let options = {
-        header: new Headers ({
+        headers: new Headers ({
             "Content-Type": "application/json",
         }),
         url: API_BASE_URL + api,
