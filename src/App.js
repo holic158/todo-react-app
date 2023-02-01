@@ -1,11 +1,17 @@
 import './App.css';
 import Todo from './Todo';
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Container, List, Paper } from "@mui/material" 
 import AddTodo from './AddTodo';
+import { call } from "./service/ApiService"
 
 function App() {
   const [items, setItem] = useState([]);
+
+  useEffect(() => {
+    call("/todo", "GET", null)
+      .then((response) => setItem(response.data));
+  }, []);
 
   const addItem = (item) => {
     item.id = "ID-" + items.length;
